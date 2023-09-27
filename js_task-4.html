@@ -3,27 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>js_task-4</title>
+    <title>js_task4</title>
 </head>
 <body>
     <div>
-        <p>Date: <span id="date"></span></p>
-        <p>Time (IST): <span id="time"></span></p>
+        <button onclick="showDate()">Show Date</button><p id="outputDate"></p>
+        <button onclick="showTime()">Show Time</button><p id="outputTime"></p>
     </div>
 
-    <button onclick="showDate()">Show Date</button>
-    <button onclick="showTime()">Show Time</button>
 
     <script>
         function showDate() {
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const date = new Date().toLocaleDateString('en-IN', options);
-            document.getElementById('date').innerText = date;
+            const options = { day: '2-digit', month: 'short', year: 'numeric' };
+            const date = new Date().toLocaleDateString('en-IN', options).replace(/\//g, '/');
+            document.getElementById('outputDate').innerText = date;
         }
 
         function showTime() {
-            const time = new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata' });
-            document.getElementById('time').innerText = time;
+            const options = { weekday: 'short',  month: 'short', day: 'numeric',year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'long' };
+            const time = new Date().toLocaleDateString('en-IN', options);
+            const timeZone = new Date().toLocaleTimeString('en-US', { timeZoneName: 'short' });
+            document.getElementById('outputTime').innerText = time + ' ' + timeZone.replace(/(\w+)\/.*/, '$1');
         }
     </script>
 </body>
